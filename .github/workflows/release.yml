@@ -43,18 +43,11 @@ jobs:
           test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1"
         }
         
-        # Check each project for changes and update versions in MimeTypeCore folder
-        for proj in $(find ./MimeTypeCore -name "*.csproj"); do
-          PROJECT_NAME=$(basename "$proj")
-          PROJECT_DIR=$(dirname "$proj")
-          
-          # Get current version from csproj
-          CURRENT_VERSION=$(grep -oP '(?<=<Version>).*(?=</Version>)' "$proj" || echo "0.0.0")
-          
-          if [ -z "$CURRENT_VERSION" ]; then
-            echo "Warning: Could not find version in $proj"
-            continue
-          fi
+        # First, find the main project (MimeTypeCore.csproj) and use its version as base
+        MAIN_PROJECT="./MimeTypeCore/MimeTypeCore/MimeTypeCore.csproj"
+        if [ -f "$MAIN_PROJECT" ]; then
+          CURRENT_VERSION=$(grep -oP '(?<=<Version>).*(?=</Version>)' "$MAIN_PROJECT" || echo "1.0.0")
+          echo "Found main project version: $CURRENT_VERSION"
           
           # Split version into parts
           IFS='.' read -r -a VERSION_PARTS <<< "$CURRENT_VERSION"
@@ -62,41 +55,46 @@ jobs:
           MINOR="${VERSION_PARTS[1]}"
           PATCH="${VERSION_PARTS[2]}"
           
-          # Check if project has changes since last tag
-          if [ -z "$LATEST_TAG" ] || ! git diff --quiet $LATEST_TAG HEAD -- "$PROJECT_DIR"; then
-            # Calculate new version based on release type
-            case "${{ github.event.inputs.release_type }}" in
-              "major")
-                PROJECT_NEW_VERSION="$((MAJOR + 1)).0.0"
-                ;;
-              "minor")
-                PROJECT_NEW_VERSION="${MAJOR}.$((MINOR + 1)).0"
-                ;;
-              "patch")
-                PROJECT_NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
-                ;;
-            esac
-            
-            # Update version in csproj
-            sed -i "s/<Version>.*<\/Version>/<Version>${PROJECT_NEW_VERSION}<\/Version>/g" "$proj"
-            
-            CHANGED_PROJECTS="$CHANGED_PROJECTS$PROJECT_NAME -> $PROJECT_NEW_VERSION\n"
-            SHOULD_RELEASE="true"
-            
-            # Update NEW_VERSION if this project's version is higher
-            if [ -z "$NEW_VERSION" ] || version_gt "$PROJECT_NEW_VERSION" "$NEW_VERSION"; then
-              NEW_VERSION="$PROJECT_NEW_VERSION"
-              echo "New highest version: $NEW_VERSION from $PROJECT_NAME"
-            fi
-          fi
-        done
-        
-        if [ -z "$NEW_VERSION" ]; then
-          echo "No version changes detected"
-          exit 0
+          # Calculate new version based on release type
+          case "${{ github.event.inputs.release_type }}" in
+            "major")
+              NEW_VERSION="$((MAJOR + 1)).0.0"
+              ;;
+            "minor")
+              NEW_VERSION="${MAJOR}.$((MINOR + 1)).0"
+              ;;
+            "patch")
+              NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+              ;;
+          esac
+          
+          echo "New version will be: $NEW_VERSION"
+        else
+          echo "Main project not found, using fallback logic"
+          NEW_VERSION="1.0.0"
         fi
         
-        echo "Final highest version will be: v$NEW_VERSION"
+        # Update all projects in MimeTypeCore folder with the new version
+        for proj in $(find ./MimeTypeCore -name "*.csproj"); do
+          PROJECT_NAME=$(basename "$proj")
+          PROJECT_DIR=$(dirname "$proj")
+          
+          echo "Processing project: $PROJECT_NAME"
+          
+          # Update version in csproj
+          sed -i "s/<Version>.*<\/Version>/<Version>${NEW_VERSION}<\/Version>/g" "$proj"
+          
+          # If version tag doesn't exist, add it
+          if ! grep -q "<Version>" "$proj"; then
+            # Add version after PropertyGroup opening tag
+            sed -i '/<PropertyGroup>/a\    <Version>'${NEW_VERSION}'</Version>' "$proj"
+          fi
+          
+          CHANGED_PROJECTS="$CHANGED_PROJECTS$PROJECT_NAME -> $NEW_VERSION\n"
+          SHOULD_RELEASE="true"
+        done
+        
+        echo "Final version: v$NEW_VERSION"
         
         # Set environment variables for next steps
         echo "CHANGED_PROJECTS<<EOF" >> $GITHUB_ENV
