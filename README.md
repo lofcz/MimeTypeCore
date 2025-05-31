@@ -27,7 +27,7 @@ MimeTypeMap.TryGetExtension("image/png", out string extension); // .png
 
 ## Collisions
 
-Sometimes, one extension can have multiple `MIME` types associated with it. For example, `.ts` might be `text/typescript`, or `video/mpeg` (`ts` stands for Transport Stream in this case). To resolve the collision, provide `Stream` to the file, so the header can be sampled for a known sequence of magic bytes:
+Sometimes, one extension can have multiple `MIME` types associated. For example, `.ts` might be `text/typescript`, or `video/mpeg` (`ts` stands for Transport Stream in this case). To resolve the collision, provide `Stream` to the file, so the header can be sampled for a known sequence of magic bytes:
 ```csharp
 using FileStream streamVideo = File.Open("files/video.ts", FileMode.Open);
 using FileStream streamTypescript = File.Open("files/typescript.ts", FileMode.Open);
