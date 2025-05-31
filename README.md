@@ -3,7 +3,7 @@
 # MimeTypeCore
 
 <img align="left" width="128" height="128" alt="Te Reo Icon" src="https://github.com/user-attachments/assets/250152a4-cbcd-409b-9290-36a2dd7c77f8" />
-Fast MIME type mapping library for the .NET ecosystem. Supports almost any Core and Framework version, including <code>netstandard1.2</code>, <code>net40</code>, and <code>net8.0</code>. Extensively tested, focused on performance, and <i>working out of the box</i>. Get your <code>MIME</code> type or extension and be done with it <i>fast</i>. The mapping is zero-config by default. MimeTypeCore builds upon <a href="https://github.com/samuelneff/MimeTypeMap">MimeTypeMap</a>.
+Fast MIME type mapping library for the .NET ecosystem. Supports almost any Core and Framework version, including <code>netstandard1.2</code>, <code>net40</code>, and <code>net8.0</code>. Extensively tested, focused on performance, and <i>working out of the box</i>. Get your <code>MIME</code> type or extension and be done with it <i>fast</i>. The mapping is zero-config by default and sourced from authoritative sources, such as <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">iana</a>, and <a href="https://mimetype.io/all-types">mimetype</a>. MimeTypeCore builds upon <a href="https://github.com/samuelneff/MimeTypeMap">MimeTypeMap</a>.
 
 <br/><br/>
 
