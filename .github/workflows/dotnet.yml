@@ -23,18 +23,20 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.203
+        dotnet-version: 8.0.409
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: '22'
         
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: ./MimeTypeCore
 
     - name: Build
       run: dotnet build --no-restore
+      working-directory: ./MimeTypeCore
 
     - name: Update GitHub status check
       if: always()
