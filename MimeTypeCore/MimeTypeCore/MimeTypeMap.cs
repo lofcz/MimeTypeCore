@@ -206,22 +206,12 @@ public static class MimeTypeMap
     /// Gets the extension from the provided MIME type.
     /// </summary>
     /// <param name="mimeType">Type of the MIME.</param>
-    /// <param name="throwErrorIfNotFound">if set to <c>true</c>, throws error if extension's not found.</param>
+    /// <param name="extension">Extension of the file.</param>
     /// <returns>The extension.</returns>
     /// <exception cref="ArgumentNullException" />
     /// <exception cref="ArgumentException" />
-    public static string GetExtension(string mimeType, bool throwErrorIfNotFound = true)
+    public static bool TryGetExtension(string mimeType, out string? extension)
     {
-        if (mimeType.StartsWith(Dot))
-        {
-            throw new ArgumentException("Requested mime type is not valid: " + mimeType);
-        }
-
-        if (mappings.Value.TryGetValue(mimeType, out string? extension))
-        {
-            return extension;
-        }
-
-        return throwErrorIfNotFound ? throw new ArgumentException("Requested mime type is not registered: " + mimeType) : string.Empty;
+        return mimeType.StartsWith(Dot) ? throw new ArgumentException("Requested mime type is not valid: " + mimeType) : mappings.Value.TryGetValue(mimeType, out extension);
     }
 }
