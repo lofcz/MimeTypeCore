@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeTypeCore", "MimeTypeCore\MimeTypeCore.csproj", "{840CC6EA-8A9F-42A4-BB7D-D12022DBE2F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeTypeCore.Tests", "MimeTypeCore.Tests\MimeTypeCore.Tests.csproj", "{F58A87DF-7B30-462C-8FD8-37F82895FC48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{840CC6EA-8A9F-42A4-BB7D-D12022DBE2F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{840CC6EA-8A9F-42A4-BB7D-D12022DBE2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{840CC6EA-8A9F-42A4-BB7D-D12022DBE2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{840CC6EA-8A9F-42A4-BB7D-D12022DBE2F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F58A87DF-7B30-462C-8FD8-37F82895FC48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F58A87DF-7B30-462C-8FD8-37F82895FC48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F58A87DF-7B30-462C-8FD8-37F82895FC48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F58A87DF-7B30-462C-8FD8-37F82895FC48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

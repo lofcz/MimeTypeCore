@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TargetFrameworks>net8.0;netstandard1.2;netstandard2.0;net40;net46;net472;net48</TargetFrameworks>
+        <LangVersion>preview</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>MimeTypeCore</Title>
+        <Authors>Matěj Štágl, MimeType Contributors</Authors>
+        <Description>Successor to MimeTypeMap with magic bytes based collision resolution and extra mappings.</Description>
+        <Copyright>Matěj Štágl</Copyright>
+        <PackageProjectUrl>https://github.com/lofcz/MimeTypeCore</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/lofcz/MimeTypeCore</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>MimeType,MimeTypeMap</PackageTags>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PackageIcon>icon.jpg</PackageIcon>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="icon.jpg" Pack="true" PackagePath=""/>
+    </ItemGroup>
+</Project>
