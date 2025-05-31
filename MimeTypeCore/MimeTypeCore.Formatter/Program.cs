@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        string path = "../../../../MimeTypeCore/MimeTypeMap.cs";
+        string path = "../../../../MimeTypeCore/MimeTypeMapMapping.cs";
         
         if (File.Exists(path))
         {
