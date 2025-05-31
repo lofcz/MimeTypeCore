@@ -1,4 +1,6 @@
-﻿namespace MimeTypeCore.Formatter;
+﻿using System.Runtime.CompilerServices;
+
+namespace MimeTypeCore.Formatter;
 
 class Program
 {

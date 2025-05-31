@@ -22,4 +22,9 @@
     <ItemGroup>
         <None Include="icon.jpg" Pack="true" PackagePath=""/>
     </ItemGroup>
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>MimeTypeCore.Inserter</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
 </Project>
