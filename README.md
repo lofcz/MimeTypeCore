@@ -36,6 +36,26 @@ MimeTypeMap.TryGetMimeType(streamVideo, out string mimeTypeVideo); // video/mpeg
 MimeTypeMap.TryGetMimeType(streamTypescript, out string mimeTypeTypescript); // text/typescript
 ```
 
+## Browser
+
+When dealing with user-provided files, either from Blazor or MVC, your input is probably `IBrowserFile` or `IFormFile`. These streams don't support synchronous reading, use `MimeTypeMap.TryGetMimeTypeAsync`:
+```cs
+IBrowserFile file; // for example, from InputFileChangeEventArgs
+
+try
+{
+    // 500 MB, use reasonable limits out there
+    await using Stream stream = file.OpenReadStream(512_000_000);
+
+    // null if not recognized, your MIME type otherwise
+    string? mimeType = await MimeTypeMap.TryGetMimeTypeAsync(args.File.Name, stream);
+}
+catch (Exception e) // for example, the file size is over the OpenReadStream limit, etc.
+{
+    
+}
+```
+
 ## Contributing
 
 To contribute, check the [mapping](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore/MimeTypeMapMapping.cs) file for the hardcoded mappings, and add new entries. Please follow the code style and alphabetical ordering. Magic headers can be contributed to [this](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore/MimeTypeMapMagicBytes.cs) file. If you are touching anything beyond that, provide relevant [test cases](https://github.com/lofcz/MimeTypeCore/tree/master/MimeTypeCore/MimeTypeCore.Tests). Thank you.
