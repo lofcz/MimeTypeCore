@@ -889,6 +889,7 @@ internal static class MimeTypeMapMapping
         { ".rct", "text/plain" },
         { ".rdf", "application/rdf+xml" },
         { ".rdlc", "application/xml" },
+        { ".rdp", "application/rdp" },
         { ".rdz", "application/vnd.data-vision.rdz" },
         { ".reg", "text/plain" },
         { ".rep", "application/vnd.businessobjects" },

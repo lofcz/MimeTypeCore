@@ -1,5 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5547cdc1_002Dd632_002D4749_002D9e97_002D03cfc5f0c5ce/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CollisionTs #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ARenderMode_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E2_003Fresharper_002Dhost_003FSourcesCache_003Fae5e6ea1f634fbf8260afe1a05f5dab4617d8a33afe3d3ab1f61a791cc0d530_003FRenderMode_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5547cdc1_002Dd632_002D4749_002D9e97_002D03cfc5f0c5ce/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CollisionTs #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F58A87DF-7B30-462C-8FD8-37F82895FC48::net8.0::MimeTypeCore.Tests.Tests.CollisionTs&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
@@ -7,7 +8,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c6db735f_002Dff4a_002D4382_002D9118_002Dd8dd5084880e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CollisionTs #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\lordo\Documents\GitHub\MimeTypeCore\MimeTypeCore\MimeTypeCore.Tests" Presentation="&amp;lt;MimeTypeCore.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e46d950d_002D20d2_002D4ac2_002D91e4_002Dfee8d2e12730/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CollisionTs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e46d950d_002D20d2_002D4ac2_002D91e4_002Dfee8d2e12730/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CollisionTs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F58A87DF-7B30-462C-8FD8-37F82895FC48::net8.0::MimeTypeCore.Tests.Tests.CollisionTs&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
