@@ -25,7 +25,7 @@ MimeTypeMap.TryGetMimeType(".png", out string mimeTypePng); // image/png
 MimeTypeMap.TryGetExtension("image/png", out string extension); // .png
 ```
 
-_⭐ Please consider starring this repository if you find it helpful._
+_⭐ That's it! Please consider starring this repository if you find it helpful._
 
 ## 🔮 Collisions
 
