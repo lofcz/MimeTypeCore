@@ -7,6 +7,8 @@ Fast MIME type mapping library for the .NET ecosystem. Supports almost any Core 
 
 <br/><br/>
 
+### Try it online: [WASM demo](https://lofcz.github.io/MimeTypeCore)
+
 ## Getting Started
 
 Install the package via NuGet:
@@ -23,7 +25,7 @@ MimeTypeMap.TryGetMimeType(".png", out string mimeTypePng); // image/png
 MimeTypeMap.TryGetExtension("image/png", out string extension); // .png
 ```
 
-⭐ **That's it!** Please consider starring this repository if you find it helpful.
+_⭐ Please consider starring this repository if you find it helpful._
 
 ## Collisions
 
@@ -38,9 +40,9 @@ MimeTypeMap.TryGetMimeType(streamTypescript, out string mimeTypeTypescript); // 
 
 ## Browser
 
-When dealing with user-provided files, either from Blazor or MVC, your input is probably `IBrowserFile` or `IFormFile`. These streams don't support synchronous reading, use `MimeTypeMap.TryGetMimeTypeAsync`:
+When dealing with user-provided files, whether from Blazor or MVC, your input is likely to be `IBrowserFile` or `IFormFile`. These streams don't support synchronous reading, use `MimeTypeMap.TryGetMimeTypeAsync`:
 ```cs
-IBrowserFile file; // for example, from InputFileChangeEventArgs
+IBrowserFile file; // for example from InputFileChangeEventArgs
 
 try
 {
@@ -50,7 +52,7 @@ try
     // null if not recognized, your MIME type otherwise
     string? mimeType = await MimeTypeMap.TryGetMimeTypeAsync(args.File.Name, stream);
 }
-catch (Exception e) // for example, the file size is over the OpenReadStream limit, etc.
+catch (Exception e) // the file size is probably over the OpenReadStream limit
 {
     
 }
