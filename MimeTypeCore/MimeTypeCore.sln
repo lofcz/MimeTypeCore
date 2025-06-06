@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeTypeCore.Example.Web", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeTypeCore.Example.Wasm", "MimeTypeCore.Example.Wasm\MimeTypeCore.Example.Wasm.csproj", "{BB8D1C49-44F3-48AF-8FA6-22213E253683}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeTypeCore.Example.Mvc", "MimeTypeCore.Example.Mvc\MimeTypeCore.Example.Mvc.csproj", "{3258C77E-9064-4686-A9E2-F1981CCA1C8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +56,9 @@ Global
 		{BB8D1C49-44F3-48AF-8FA6-22213E253683}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB8D1C49-44F3-48AF-8FA6-22213E253683}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB8D1C49-44F3-48AF-8FA6-22213E253683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3258C77E-9064-4686-A9E2-F1981CCA1C8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3258C77E-9064-4686-A9E2-F1981CCA1C8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3258C77E-9064-4686-A9E2-F1981CCA1C8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3258C77E-9064-4686-A9E2-F1981CCA1C8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

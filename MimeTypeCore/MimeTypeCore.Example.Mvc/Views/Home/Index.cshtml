@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form enctype="multipart/form-data" onsubmit="Submit(this);return false;" method="post">
+  
+  <div style="margin-bottom: 6px; font-weight: 500; font-size: 1.2em;">Choose any file from your device to get its MIME type:</div>
+  <input required="required" style="width: 300px; margin-bottom: 1rem;" class="form-control" id="FileUpload_FormFile" type="file" name="FileUpload.FormFile"/>
+  <input class="btn btn-primary" type="submit" value="Get MIME type"/>
+</form>
+
+<div style="margin-top: 1rem;">
+  <div id="result" style="max-width: min(100%, 350px); display: none;" class="alert alert-danger" role="alert"></div>
+</div>
+
+<script>
+  async function Submit(formEl) {
+    let resultEl = document.getElementById("result");
+    const formData = new FormData(formEl);
+
+    resultEl.style.display = "none";
+    resultEl.innerHTML = "";
+    resultEl.classList.remove("alert-danger");
+    resultEl.classList.remove("alert-success");
+    
+    try {
+      const response = await fetch("/Home/GetMime", {
+        method: 'POST',
+        body: formData
+      });
+      
+      let decoded = await response.json();
+      
+      if (decoded.error) {
+        resultEl.classList.add("alert-danger");
+        resultEl.innerHTML = `
+              <span>${decoded.error}</span>
+          `;
+      }
+      else {
+        
+        if (decoded.mimeUnknown) {
+          resultEl.classList.add("alert-danger");
+          resultEl.innerHTML = `
+              <span>Unknown MIME type.</span>
+          `;
+        }
+        else {
+          resultEl.classList.add("alert-success");
+          resultEl.innerHTML = `
+              <span>MIME type: <code>${decoded.mime}</code></span>
+          `; 
+        }
+      }
+      
+      resultEl.style.display = "block";
+    } catch (error) {
+      resultEl.classList.add("alert-danger");
+      resultEl.innerHTML = `
+          <span>${error}</span>
+      `;
+
+      resultEl.style.display = "block";
+    }
+  }
+</script>
