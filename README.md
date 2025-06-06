@@ -62,6 +62,7 @@ catch (Exception e) // the file size is probably over the OpenReadStream limit
 
 - [Blazor Server](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Web/Components/Pages/Home.razor)
 - [Blazor Wasm](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Wasm/Pages/Home.razor)
+- [MVC](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Mvc/Controllers/HomeController.cs)
 
 ## 🏵️ Contributing
 
