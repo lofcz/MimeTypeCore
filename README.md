@@ -11,7 +11,7 @@ Fast MIME type mapping library for the .NET ecosystem. Supports almost any Core 
 
 ## ⚡ Getting Started
 
-Install the package via NuGet:
+Install the package:
 
 ```powershell
 dotnet add package MimeTypeCore
