@@ -174,11 +174,11 @@ internal static class MagicByteDefinitions
         Sig("mov", ["0x77", "0x69", "0x64", "0x65"], new Info { Mime = "video/quicktime", Extension = "mov" }, 0x4);
         Sig("mov", ["0x66", "0x74", "0x79", "0x70", "0x71", "0x74"], new Info { Mime = "video/quicktime", Extension = "mov" }, 0x4);
         Sig("hl2demo", ["0x48", "0x4C", "0x32", "0x44", "0x45", "0x4D", "0x4F"]);
-        Sig("txt", ["0xEF", "0xBB", "0xBF"], new Info { Mime = "text/plain; charset=UTF-8", Extension = "txt" });
-        Sig("txt", ["0xFF", "0xFE"], new Info { Mime = "text/plain; charset=UTF-16LE", Extension = "txt" });
-        Sig("txt", ["0xFE", "0xFF"], new Info { Mime = "text/plain; charset=UTF-16BE", Extension = "txt" });
-        Sig("txt", ["0xFF", "0xFE", "0x00", "0x00"], new Info { Mime = "text/plain; charset=UTF-32LE", Extension = "txt" });
-        Sig("txt", ["0x00", "0x00", "0xFE", "0xFF"], new Info { Mime = "text/plain; charset=UTF-32BE", Extension = "txt" });
+        Sig("txt", ["0xEF", "0xBB", "0xBF"], new Info { Mime = "text/plain", Extension = "txt" });
+        Sig("txt", ["0xFF", "0xFE"], new Info { Mime = "text/plain", Extension = "txt" });
+        Sig("txt", ["0xFE", "0xFF"], new Info { Mime = "text/plain", Extension = "txt" });
+        Sig("txt", ["0xFF", "0xFE", "0x00", "0x00"], new Info { Mime = "text/plain", Extension = "txt" });
+        Sig("txt", ["0x00", "0x00", "0xFE", "0xFF"], new Info { Mime = "text/plain", Extension = "txt" });
         Sig("SubRip", ["0x31", "0x0D", "0x0A", "0x30", "0x30", "0x3A"], new Info { Mime = "application/x-subrip", Extension = "srt" });
         Sig("WebVTT", ["0xEF", "0xBB", "0xBF", "0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0A"], new Info { Mime = "text/vtt", Extension = "vtt" });
         Sig("WebVTT", ["0xEF", "0xBB", "0xBF", "0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0D"], new Info { Mime = "text/vtt", Extension = "vtt" });

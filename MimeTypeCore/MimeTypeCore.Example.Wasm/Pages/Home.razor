@@ -1,0 +1,48 @@
+﻿@page "/"
+@code {
+    
+    string? lastMimeType, error;
+    bool processed;
+
+    async Task HandleFileChange(InputFileChangeEventArgs args)
+    {
+        processed = false;
+        error = null;
+        lastMimeType = null;
+        StateHasChanged();
+    
+        try
+        {
+            await using Stream stream = args.File.OpenReadStream(512_000_000);
+            lastMimeType = await MimeTypeMap.TryGetMimeTypeAsync(args.File.Name, stream);
+        }
+        catch (Exception e) // for example, the file size is over the OpenReadStream limit, etc.
+        {
+            error = $"{e.Message}";
+        }
+        
+        processed = true; 
+        StateHasChanged();
+    }
+}
+
+<div>Choose any file smaller than 500 MB from your device to get it's MIME type:</div>
+<InputFile OnChange="HandleFileChange" style="width: 300px;" class="form-control" />
+
+<div style="height: 1rem;"></div>
+
+@if (error is not null)
+{
+    <div style="color: red;">@error</div>
+}
+else if (processed)
+{
+    if (lastMimeType is null)
+    {
+        <div>MIME type not recognized.</div>
+    }
+    else 
+    {
+        <div>MIME type: <code>@lastMimeType</code></div>
+    }
+}

@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeTypeCore.Inserter", "Mi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeTypeCore.Example.Web", "MimeTypeCore.Example.Web\MimeTypeCore.Example.Web.csproj", "{83AFE13C-6A31-42A2-83D8-817BE10DA292}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeTypeCore.Example.Wasm", "MimeTypeCore.Example.Wasm\MimeTypeCore.Example.Wasm.csproj", "{BB8D1C49-44F3-48AF-8FA6-22213E253683}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{83AFE13C-6A31-42A2-83D8-817BE10DA292}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83AFE13C-6A31-42A2-83D8-817BE10DA292}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83AFE13C-6A31-42A2-83D8-817BE10DA292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB8D1C49-44F3-48AF-8FA6-22213E253683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB8D1C49-44F3-48AF-8FA6-22213E253683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB8D1C49-44F3-48AF-8FA6-22213E253683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB8D1C49-44F3-48AF-8FA6-22213E253683}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
