@@ -7,9 +7,9 @@ Fast MIME type mapping library for the .NET ecosystem. Supports almost any Core 
 
 <br/><br/>
 
-### Try it online: [WASM demo](https://lofcz.github.io/MimeTypeCore)
+### ➡️ Try it online: [WASM demo](https://lofcz.github.io/MimeTypeCore)
 
-## Getting Started
+## ⚡ Getting Started
 
 Install the package via NuGet:
 
@@ -27,7 +27,7 @@ MimeTypeMap.TryGetExtension("image/png", out string extension); // .png
 
 _⭐ Please consider starring this repository if you find it helpful._
 
-## Collisions
+## 🔮 Collisions
 
 Sometimes, one extension can have multiple `MIME` types associated. For example, `.ts` might be `text/typescript`, or `video/mpeg` (`ts` stands for Transport Stream in this case). To resolve the collision, provide `Stream` to the file, so the header can be sampled for a known sequence of magic bytes:
 ```csharp
@@ -38,7 +38,7 @@ MimeTypeMap.TryGetMimeType(streamVideo, out string mimeTypeVideo); // video/mpeg
 MimeTypeMap.TryGetMimeType(streamTypescript, out string mimeTypeTypescript); // text/typescript
 ```
 
-## Browser
+## 🌐 Browser
 
 When dealing with user-provided files, whether from Blazor or MVC, your input is likely to be `IBrowserFile` or `IFormFile`. These streams don't support synchronous reading, use `MimeTypeMap.TryGetMimeTypeAsync`:
 ```cs
@@ -58,9 +58,12 @@ catch (Exception e) // the file size is probably over the OpenReadStream limit
 }
 ```
 
-Feel free to check out the minimal Blazor example [here](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Web/Components/Pages/Home.razor).
+## 🎯 Examples
 
-## Contributing
+- [Blazor Server](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Web/Components/Pages/Home.razor)
+- [Blazor Wasm](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Wasm/Pages/Home.razor)
+
+## 🏵️ Contributing
 
 To contribute, check the [mapping](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore/MimeTypeMapMapping.cs) file for the hardcoded mappings, and add new entries. Please follow the code style and alphabetical ordering. Magic headers can be contributed to [this](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore/MimeTypeMapMagicBytes.cs) file. If you are touching anything beyond that, provide relevant [test cases](https://github.com/lofcz/MimeTypeCore/tree/master/MimeTypeCore/MimeTypeCore.Tests). Thank you.
 
