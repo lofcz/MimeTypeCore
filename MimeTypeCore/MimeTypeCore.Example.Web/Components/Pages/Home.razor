@@ -2,7 +2,7 @@
 @code {
     
     string? lastMimeType, error;
-    bool processed;
+    bool processed, anyOk;
 
     async Task HandleFileChange(InputFileChangeEventArgs args)
     {
@@ -13,8 +13,9 @@
     
         try
         {
-            await using Stream stream = args.File.OpenReadStream(512_000_000);
+            await using Stream stream = args.File.OpenReadStream(long.MaxValue);
             lastMimeType = await MimeTypeMap.TryGetMimeTypeAsync(args.File.Name, stream);
+            anyOk = lastMimeType is not null;
         }
         catch (Exception e) // for example, the file size is over the OpenReadStream limit, etc.
         {
@@ -26,23 +27,44 @@
     }
 }
 
-<div>Choose any file smaller than 500 MB from your device to get it's MIME type:</div>
+<div style="margin-bottom: 6px; font-weight: 500; font-size: 1.2em;">Choose any file from your device to get its MIME type:</div>
 <InputFile OnChange="HandleFileChange" style="width: 300px;" class="form-control" />
+
+<div style="margin-top: 6px;">
+    <i>Note: there is no server, nothing is uploaded.</i>
+</div>
 
 <div style="height: 1rem;"></div>
 
 @if (error is not null)
 {
-    <div style="color: red;">@error</div>
+    <div style="max-width: min(100%, 350px)" class="alert alert-danger" role="alert">
+        <span>@error</span>
+    </div>
 }
 else if (processed)
 {
     if (lastMimeType is null)
     {
-        <div>MIME type not recognized.</div>
+        <div style="max-width: min(100%, 350px)" class="alert alert-danger" role="alert">
+            <span>MIME type not recognized.</span>
+        </div>
     }
     else 
     {
-        <div>MIME type: <code>@lastMimeType</code></div>
+        <div style="max-width: min(100%, 350px)" class="alert alert-success" role="alert">
+            MIME type: <code>@lastMimeType</code>
+        </div>
     }
 }
+
+<div style="margin-top: 1rem;">
+    <small>GitHub: <a href="https://github.com/lofcz/mimetypecore" target="_blank">https://github.com/lofcz/mimetypecore</a></small>
+    
+    @if (anyOk)
+    {
+        <div>
+            <small><b>⭐ Please consider starring the repository if you find it useful.</b></small>
+        </div>   
+    }
+</div>

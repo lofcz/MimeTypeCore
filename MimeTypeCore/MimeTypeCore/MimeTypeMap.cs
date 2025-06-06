@@ -68,6 +68,16 @@ public static class MimeTypeMap
                 extension = Dot + str;
             }
         }
+        else
+        {
+            int lastDotIndex = str.LastIndexOf('.');
+            
+#if NET8_0_OR_GREATER
+            extension = string.Concat(Dot, str.AsSpan(lastDotIndex + 1));
+#else
+            extension = Dot + str.Substring(lastDotIndex + 1);
+#endif
+        }
 
         return mappings.Value.TryGetValue(extension, out mimeType);
     }
