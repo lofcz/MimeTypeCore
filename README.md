@@ -3,15 +3,15 @@
 # MimeTypeCore
 
 <img align="left" width="128" height="128" alt="Te Reo Icon" src="https://github.com/user-attachments/assets/250152a4-cbcd-409b-9290-36a2dd7c77f8" />
-Fast MIME type mapping library for the .NET ecosystem. Supports almost any Core and Framework version, including <code>netstandard1.2</code>, <code>net40</code>, and <code>net8.0</code>. Extensively tested, focused on performance, and <i>working out of the box</i>. Get your <code>MIME</code> type or extension and be done with it <i>fast</i>. The mapping is zero-config by default and sourced from authoritative sources, such as <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">iana</a>, and <a href="https://mimetype.io/all-types">mimetype</a>. About 1,500 extensions and MIME types are mapped. MimeTypeCore builds upon <a href="https://github.com/samuelneff/MimeTypeMap">MimeTypeMap</a>.
+Fast MIME type mapping library for the .NET ecosystem. Supports almost any Core and Framework version, including <code>netstandard1.2</code>, <code>net40</code>, and <code>net8.0</code>. Extensively tested, focused on performance, and <i>working out of the box</i>. Get your <code>MIME</code> type or extension and be done with it <i>fast</i>. The mapping is zero-config by default and sourced from authoritative sources, such as <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA</a>, and <a href="https://mimetype.io/all-types">MimeType</a>. About 2,000 extensions and MIME types are mapped. MimeTypeCore builds upon <a href="https://github.com/samuelneff/MimeTypeMap">MimeTypeMap</a>.
 
 <br/><br/>
 
-### Try it online: [WASM demo](https://lofcz.github.io/MimeTypeCore)
+### ➡️ Try it online: [WASM demo](https://lofcz.github.io/MimeTypeCore)
 
-## Getting Started
+## ⚡ Getting Started
 
-Install the package via NuGet:
+Install the package:
 
 ```powershell
 dotnet add package MimeTypeCore
@@ -25,9 +25,9 @@ MimeTypeMap.TryGetMimeType(".png", out string mimeTypePng); // image/png
 MimeTypeMap.TryGetExtension("image/png", out string extension); // .png
 ```
 
-_⭐ Please consider starring this repository if you find it helpful._
+_⭐ That's it! Please consider starring this repository if you find it helpful._
 
-## Collisions
+## 🔮 Collisions
 
 Sometimes, one extension can have multiple `MIME` types associated. For example, `.ts` might be `text/typescript`, or `video/mpeg` (`ts` stands for Transport Stream in this case). To resolve the collision, provide `Stream` to the file, so the header can be sampled for a known sequence of magic bytes:
 ```csharp
@@ -38,7 +38,7 @@ MimeTypeMap.TryGetMimeType(streamVideo, out string mimeTypeVideo); // video/mpeg
 MimeTypeMap.TryGetMimeType(streamTypescript, out string mimeTypeTypescript); // text/typescript
 ```
 
-## Browser
+## 🌐 Browser
 
 When dealing with user-provided files, whether from Blazor or MVC, your input is likely to be `IBrowserFile` or `IFormFile`. These streams don't support synchronous reading, use `MimeTypeMap.TryGetMimeTypeAsync`:
 ```cs
@@ -58,9 +58,12 @@ catch (Exception e) // the file size is probably over the OpenReadStream limit
 }
 ```
 
-Feel free to check out the minimal Blazor example [here](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Web/Components/Pages/Home.razor).
+## 🎯 Examples
 
-## Contributing
+- [Blazor Server](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Web/Components/Pages/Home.razor)
+- [Blazor Wasm](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Wasm/Pages/Home.razor)
+
+## 🏵️ Contributing
 
 To contribute, check the [mapping](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore/MimeTypeMapMapping.cs) file for the hardcoded mappings, and add new entries. Please follow the code style and alphabetical ordering. Magic headers can be contributed to [this](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore/MimeTypeMapMagicBytes.cs) file. If you are touching anything beyond that, provide relevant [test cases](https://github.com/lofcz/MimeTypeCore/tree/master/MimeTypeCore/MimeTypeCore.Tests). Thank you.
 
