@@ -58,6 +58,15 @@ catch (Exception e) // the file size is probably over the OpenReadStream limit
 }
 ```
 
+## 💡 Custom MIME types
+
+If you need to register custom MIME/file extension pairs, use `MimeTypeMap.AddMimeTypes`:
+```cs
+MimeTypeMap.AddMimeTypes([
+    new KeyValuePair<string, string>(".js", "text/javascript")
+]);
+```
+
 ## 🎯 Examples
 
 - [Blazor Server](https://github.com/lofcz/MimeTypeCore/blob/master/MimeTypeCore/MimeTypeCore.Example.Web/Components/Pages/Home.razor)
