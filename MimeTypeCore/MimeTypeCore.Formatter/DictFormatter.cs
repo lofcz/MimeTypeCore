@@ -53,29 +53,43 @@ public class DictionaryFormatter
 
         int dictionaryDeclarationLineIndex = -1;
         int dictionaryEndLineIndex = -1;
+        int dictionaryContentStartLineIndex = -1; // The line with the opening '{'
 
-        // 1. Find the start of the dictionary declaration
-        // We look for the line containing "new Dictionary<string, string>"
+        // 1. Find the start of the dictionary declaration and the opening brace '{'.
         for (int i = 0; i < allLines.Count; i++)
         {
-            if (allLines[i].Contains("public static readonly Dictionary<string, string> Mappings = new Dictionary<string, string>"))
+            // Find the start of the declaration, which is consistent.
+            if (allLines[i].Contains("public static readonly"))
             {
                 dictionaryDeclarationLineIndex = i;
-                break;
+
+                // Now, find the opening brace '{' that follows the declaration.
+                // It might be several lines down due to preprocessor directives.
+                for (int j = i; j < allLines.Count; j++)
+                {
+                    if (allLines[j].Trim().StartsWith("{"))
+                    {
+                        dictionaryContentStartLineIndex = j;
+                        break;
+                    }
+                }
+                break; // Stop searching once the declaration is found.
             }
         }
 
-        if (dictionaryDeclarationLineIndex == -1)
+        if (dictionaryDeclarationLineIndex == -1 || dictionaryContentStartLineIndex == -1)
         {
-            Console.WriteLine("Error: Dictionary declaration not found. Looking for 'public static readonly Dictionary<string, string> Mappings = new Dictionary<string, string>'");
+            Console.WriteLine("Error: Dictionary declaration or opening brace '{' not found.");
             return;
         }
 
-        // 2. Find the end of the dictionary block (the '};' line)
-        // Start searching from the declaration line onwards
-        for (int i = dictionaryDeclarationLineIndex; i < allLines.Count; i++)
+        // 2. Find the end of the dictionary block (the line with '}' or ';').
+        for (int i = dictionaryContentStartLineIndex; i < allLines.Count; i++)
         {
-            if (allLines[i].TrimStart().StartsWith("};"))
+            string trimmedLine = allLines[i].Trim();
+            // The closing line could be '};', '.ToFrozenDictionary();', or just ';'.
+            // The most reliable signal is the semicolon ';'.
+            if (trimmedLine.Contains(";"))
             {
                 dictionaryEndLineIndex = i;
                 break;
@@ -84,25 +98,20 @@ public class DictionaryFormatter
 
         if (dictionaryEndLineIndex == -1)
         {
-            Console.WriteLine("Error: Dictionary end '};' not found after declaration.");
+            Console.WriteLine("Error: Dictionary end ';' not found after declaration.");
             return;
         }
 
-        // 3. Extract lines before the dictionary content
-        // This includes the namespace, class, the dictionary declaration line itself, and the opening '{'
-        // The '{' is typically on the line after the declaration.
-        List<string> linesBeforeDictionary = allLines.Take(dictionaryDeclarationLineIndex + 2).ToList();
+        // 3. Extract lines before the dictionary content.
+        List<string> linesBeforeDictionary = allLines.Take(dictionaryContentStartLineIndex + 1).ToList();
 
-        // 4. Extract lines after the dictionary content
-        // This includes the '};' line and any closing braces or other code that follows
+        // 4. Extract lines after the dictionary content.
         List<string> linesAfterDictionary = allLines.Skip(dictionaryEndLineIndex).ToList();
 
-        // 5. Extract the actual content lines of the dictionary (entries and comments between '{' and '};')
-        // We skip the declaration line and the opening '{' line.
-        // We take lines up to, but not including, the '};' line.
+        // 5. Extract the actual content lines of the dictionary.
         List<string> dictionaryContentLines = allLines
-            .Skip(dictionaryDeclarationLineIndex + 2)
-            .Take(dictionaryEndLineIndex - (dictionaryDeclarationLineIndex + 2))
+            .Skip(dictionaryContentStartLineIndex + 1)
+            .Take(dictionaryEndLineIndex - (dictionaryContentStartLineIndex + 1))
             .ToList();
 
         List<IDictionaryContentItem> parsedContentItems = new List<IDictionaryContentItem>();

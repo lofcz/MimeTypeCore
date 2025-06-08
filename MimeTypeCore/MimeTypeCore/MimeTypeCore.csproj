@@ -19,6 +19,9 @@
     <Version>2.0.3</Version>
         <PackageIcon>icon.jpg</PackageIcon>
     </PropertyGroup>
+    <PropertyGroup>
+        <DefineConstants Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">$(DefineConstants);MODERN</DefineConstants>
+    </PropertyGroup>
     <ItemGroup>
         <None Include="icon.jpg" Pack="true" PackagePath=""/>
     </ItemGroup>

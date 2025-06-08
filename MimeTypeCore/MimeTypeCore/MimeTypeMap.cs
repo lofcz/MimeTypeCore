@@ -1,4 +1,7 @@
 ﻿using System;
+#if MODERN
+using System.Collections.Frozen;
+#endif
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,25 +16,12 @@ public static class MimeTypeMap
     private const string Dot = ".";
     private const string QuestionMark = "?";
     private const string DefaultMimeType = "application/octet-stream";
-    private static readonly Lazy<IDictionary<string, string>> mappings = new Lazy<IDictionary<string, string>>(BuildMappings);
-
-    private static Dictionary<string, string> BuildMappings()
-    {
-        Dictionary<string, string> localMappings = MimeTypeMapMapping.Mappings;
-
-        List<KeyValuePair<string, string>> cache = localMappings.ToList();
-
-        foreach (KeyValuePair<string, string> mapping in cache)
-        {
-            if (!localMappings.ContainsKey(mapping.Value))
-            {
-                localMappings.Add(mapping.Value, mapping.Key);
-            }
-        }
-
-        return localMappings;
-    }
-
+#if MODERN
+    private static readonly FrozenDictionary<string, string> mappings = MimeTypeMapMapping.Mappings;
+#else
+    private static readonly Dictionary<string, string> mappings = MimeTypeMapMapping.Mappings;
+#endif
+    
     /// <summary>
     /// Tries to get the type of the MIME from the provided string (filename or extension).
     /// This method relies solely on the file extension and does not read file content.
@@ -49,7 +39,7 @@ public static class MimeTypeMap
             str = str.Remove(indexQuestionMark);
         }
 
-        string extension = str;
+        string extension;
 
         if (!str.StartsWith(Dot))
         {
@@ -58,9 +48,9 @@ public static class MimeTypeMap
             if (index != -1 && str.Length > index + 1)
             {
 #if NET8_0_OR_GREATER
-                    extension = string.Concat(Dot, str.AsSpan(index + 1));
+                extension = string.Concat(Dot, str.AsSpan(index + 1));
 #else
-                extension = Dot + str.Substring(index + 1);
+                extension = $"{Dot}{str.Substring(index + 1)}".ToLowerInvariant();
 #endif
             }
             else
@@ -75,11 +65,11 @@ public static class MimeTypeMap
 #if NET8_0_OR_GREATER
             extension = string.Concat(Dot, str.AsSpan(lastDotIndex + 1));
 #else
-            extension = Dot + str.Substring(lastDotIndex + 1);
+            extension = $"{Dot}{str.Substring(lastDotIndex + 1)}".ToLowerInvariant();
 #endif
         }
 
-        return mappings.Value.TryGetValue(extension, out mimeType);
+        return mappings.TryGetValue(extension, out mimeType);
     }
 
     /// <summary>
@@ -160,7 +150,7 @@ public static class MimeTypeMap
     /// <returns>MIME type if detected, otherwise null.</returns>
     public static async Task<string?> TryGetMimeTypeAsync(string filename, Stream fileStream, CancellationToken token = default)
     {
-        string mimeType = DefaultMimeType;
+        string mimeType;
 
         if (!fileStream.CanRead)
         {
@@ -335,6 +325,10 @@ public static class MimeTypeMap
     /// <exception cref="ArgumentException" />
     public static bool TryGetExtension(string mimeType, out string? extension)
     {
-        return mimeType.StartsWith(Dot) ? throw new ArgumentException("Requested mime type is not valid: " + mimeType) : mappings.Value.TryGetValue(mimeType, out extension);
+#if !MODERN
+        mimeType = mimeType.ToLowerInvariant();        
+#endif
+        
+        return mimeType.StartsWith(Dot) ? throw new ArgumentException("Requested mime type is not valid: " + mimeType) : mappings.TryGetValue(mimeType, out extension);
     }
 }

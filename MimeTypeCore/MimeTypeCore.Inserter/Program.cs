@@ -8,7 +8,7 @@ class Program
     static void Main(string[] args)
     {
         Dictionary<string, string> source = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("input.txt"))!;
-        Dictionary<string, string> compareTo = MimeTypeMapMapping.Mappings;
+        IDictionary<string, string> compareTo = MimeTypeMapMapping.Mappings;
 
         List<KeyValuePair<string, string>> add = [];
         
