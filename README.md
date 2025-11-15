@@ -1,4 +1,4 @@
-[![MimeTypeCore](https://badgen.net/nuget/v/MimeTypeCore?v=303&icon=nuget&label=MimeTypeCore)](https://www.nuget.org/packages/MimeTypeCore)
+[![MimeTypeCore](https://shields.io/nuget/v/MimeTypeCore?v=303&icon=nuget&label=MimeTypeCore)](https://www.nuget.org/packages/MimeTypeCore)
 
 # MimeTypeCore
 
